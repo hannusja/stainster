@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import { Container } from "../components/Grid";
 import Alert from "../components/Alert"
-import DeleteBtn from "../components/DeleteBtn"
+import Stain1 from "../protocols/stain1"
 
 
 class Main extends Component {
   state = {
     alert: false,
-    alertline: ""
+    alertline: "",
+    minutes: 0,
+    seconds: 0
   }
 
   componentDidMount() {
@@ -23,8 +25,9 @@ class Main extends Component {
     <Jumbotron>
           <Alert style={{ opacity: this.state.alert ? 1 : 0, width: "400px" }} >
             {this.state.alertline}
-            <DeleteBtn onClick={() => this.setState({alert: false})} />
+            <button style={{color:"#0000ff"}} onClick={() => this.setState({alert: false})} > I understand this statement and agree with it </button>
           </Alert>
+          <Stain1 />
       <Container>
 
       </Container>
