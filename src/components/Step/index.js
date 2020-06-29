@@ -3,7 +3,7 @@ import Container from "../Jumbotron"
 
 function Step (props) {
     return (
-        <Container>
+        <Container key={props.id}>
             <button style={{color:"#0000ff", ...props.style}}> {props.text} </button>
             <Container>
                 {(props.timer) ? (

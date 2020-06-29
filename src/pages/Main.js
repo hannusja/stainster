@@ -8,6 +8,7 @@ class Main extends Component {
   state = {
     alert: false,
     alertline: "",
+    chosenStain: Container,
     minutes: 0,
     seconds: 0
   }
@@ -30,9 +31,12 @@ class Main extends Component {
           Available Stains
         </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          {protocols.map((stain,index)=>(<button className="dropdown-item" key={index}>{stain.name}</button>))}
+          {protocols.map((stain,index)=>(<button className="dropdown-item" key={index} onClick={()=>this.setState({chosenStain:protocols[index].action})}>{stain.name}</button>))}
         </div>
-      </div> 
+      </div>
+      <Container>
+          < this.state.chosenStain />
+      </Container> 
     </Jumbotron>
     )
   }
