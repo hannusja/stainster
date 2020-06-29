@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import { Container } from "../components/Grid";
 import Alert from "../components/Alert"
-import Stain1 from "../protocols/stain1"
-
+import {protocols} from "../Protocols"
 
 class Main extends Component {
   state = {
@@ -12,7 +11,6 @@ class Main extends Component {
     minutes: 0,
     seconds: 0
   }
-
   componentDidMount() {
     this.setState({
       alert: true,
@@ -27,10 +25,14 @@ class Main extends Component {
             {this.state.alertline}
             <button style={{color:"#0000ff"}} onClick={() => this.setState({alert: false})} > I understand this statement and agree with it </button>
           </Alert>
-          <Stain1 />
-      <Container>
-
-      </Container>
+      <div className="dropdown">
+        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Available Stains
+        </button>
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {protocols.map((stain,index)=>(<button className="dropdown-item" key={index}>{stain.name}</button>))}
+        </div>
+      </div> 
     </Jumbotron>
     )
   }

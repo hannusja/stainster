@@ -5,29 +5,41 @@ import Container from "../components/Jumbotron"
 const protocol=[
     {
         id: 1,
-        text:"Rinse in DI water",
+        text:"Dip in blue liquid",
         timer: true,
-        minutes: 5,
+        minutes: 0,
         seconds: 5
     },
     {
         id: 2,
-        text:"Drain",
-        timer: false
+        text:"Dip in red liquid",
+        timer: true,
+        minutes: 3,
+        seconds: 15
     },
     {
         id: 3,
-        text: "Run to xylene",
+        text:"Rinse",
         timer: false
     },
     {
         id: 4,
+        text:"Drain",
+        timer: false
+    },
+    {
+        id: 5,
+        text: "Run to xylene",
+        timer: false
+    },
+    {
+        id: 6,
         text:"Coverslip",
         timer:false
     }
 ]
 
-class Stain1 extends Component {
+class Stain2 extends Component {
 
     render() {
         return(
@@ -38,4 +50,4 @@ class Stain1 extends Component {
     }
 }
 
-export default Stain1
+export default Stain2
