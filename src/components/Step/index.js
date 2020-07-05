@@ -13,7 +13,7 @@ function Step(props) {
                 (<button style={{color:"#0000ff"}}> Check </button>)}
             </Container>
         </Container>
-    )   
+    )  
 }
 
 export default Step;
