@@ -3,12 +3,13 @@ import Jumbotron from "../components/Jumbotron";
 import { Container } from "../components/Grid";
 import Alert from "../components/Alert"
 import {protocols} from "../Protocols"
+import Step from "../components/Step"
 
 class Main extends Component {
   state = {
     alert: false,
     alertline: "",
-    chosenStain: Container,
+    chosenStain: [],
     minutes: 0,
     seconds: 0
   }
@@ -35,7 +36,7 @@ class Main extends Component {
         </div>
       </div>
       <Container>
-          < this.state.chosenStain />
+          {this.state.chosenStain.map(Step)} 
       </Container> 
     </Jumbotron>
     )
