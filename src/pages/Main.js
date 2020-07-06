@@ -28,13 +28,48 @@ class Main extends Component {
     })
   }
   nextStep=()=>{
-    (this.state.chosenStain.indexOf(this.state.currentStep)===this.state.chosenStain.length-1)?
+    (this.state.currentStep.id===this.state.chosenStain.length)?
     (this.setState({
       currentStep:{text:"You have finished this protocol. Please compare results to a know control"}
     })):
     (this.setState({
-      currentStep:this.state.chosenStain[this.state.chosenStain.indexOf(this.state.currentStep)+1]
+      currentStep:this.state.chosenStain[this.state.currentStep.id]
     }))
+  }
+  quitStain =()=>{
+    this.setState({
+      currentStep:{}
+    })
+  }
+  handleClick=()=>{
+  this.startTimer =  setInterval(() => {
+    console.log(this.state)
+    const minutes = this.state.currentStep.minutes
+    const seconds=this.state.currentStep.seconds
+    if (seconds > 0) {
+      this.setState(prevState=>({
+        currentStep:{...prevState.currentStep,
+          seconds: seconds-1
+        }
+      }))
+    }
+    if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(this.startTimer)
+          this.makeNoise()
+        } else {
+          this.setState(prevState=>({
+            currentStep:{...prevState.currentStep,
+              minutes: minutes - 1,
+              seconds: 59
+            }
+          }))
+        }
+    } 
+  }, 1000)
+}
+  makeNoise=()=>{
+    console.log("Time's up")
   }
 
   render () {
@@ -56,18 +91,19 @@ class Main extends Component {
           <button style={{color:"#0000ff", opacity: this.state.chosenStain.length ? 1 : 0}} onClick={this.stainIt}> Start </button>
           {this.state.chosenStain.map(Step)} 
       </Container>
-    {/* <Container style={{opacity: this.state.currentStep?1:0}}>{this.state.currentStep.text}</Container> */}
     <Modal show={Object.entries(this.state.currentStep).length?(true):(false)}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Current step</Modal.Title>
         </Modal.Header>
-    <Modal.Body>{this.state.currentStep.text}</Modal.Body>
+    <Modal.Body>{this.state.currentStep.text}
+    </Modal.Body>    
+    <Button style={{opacity: this.state.currentStep.timer?1:0}} onClick={this.handleClick}>{this.state.currentStep.minutes}:{this.state.currentStep.seconds < 10 ? `0${this.state.currentStep.seconds }` : this.state.currentStep.seconds }</Button>
         <Modal.Footer>
-          {/* <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button> */}
+          <Button variant="secondary" onClick={this.quitStain}>
+            Abandon stain
+          </Button>
           <Button variant="primary" onClick={this.nextStep}>
-            Check
+            Next
           </Button>
         </Modal.Footer>
       </Modal>
